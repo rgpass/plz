@@ -12,9 +12,11 @@ abort() {
 change_color() {
   case $1 in
     "blue") echo -e -n "\033[0;34m" ;;
+    "cyan") echo -e -n "\033[0;36m" ;;
     "green") echo -e -n "\033[0;32m" ;;
     "red") echo -e -n "\033[0;31m" ;;
     "yellow") echo -e -n "\033[0;33m" ;;
+    "reset") echo -e -n "\033[0m" ;;
     *) echo "$2" ;;
   esac
 }
@@ -44,7 +46,7 @@ parse_content() {
 }
 
 prompt() {
-  change_color "blue"
+  change_color "cyan"
   read -n 1 -r -p "$1"
 }
 

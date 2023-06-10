@@ -21,7 +21,7 @@ fi
 # Convert the CLI args to a string.
 input=$*
 
-response=$(response_for $input)
+response=$(response_for "$input")
 
 # If the OpenAI API key is invalid, exit with an error.
 error_code=$(echo $response | jq -r ".error.code")
@@ -44,7 +44,8 @@ change_color "green"
 echo $command
 
 # Ask the user if they want an explanation of the command.
-prompt "Press any button to continue, or e for an explanation: "
+echo ""
+prompt "Press Return to continue, or e for an explanation: "
 if [[ $REPLY =~ ^[Ee]$ ]]
 then
   echo ""
@@ -52,16 +53,25 @@ then
 
   explanation=$(explanation_for "$command")
   echo $(parse_content "$explanation")
+  echo ""
 fi
 
 # Ask the user if they want to abort the command.
-prompt "Press any button to continue, or n to cancel: "
+prompt "Press Return to continue, or n to cancel: "
 if [[ $REPLY =~ ^[Nn]$ ]]
 then
+  echo ""
   echo ""
   abort
 fi
 
+change_color "blue"
+echo ""
+echo "Executing command..."
+echo ""
+
+change_color "reset"
+
 # Re-enable globbing.
 set +f
-exit 0
+eval "$command"
