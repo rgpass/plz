@@ -31,5 +31,9 @@ The commands are potentially destructive. Ask for an explanation to confirm it's
 
 This project is heavily influenced by [`pls`](https://github.com/MxDkl/pls). The main differences are:
 
-- It applies [tree of thought prompting]() to confirm the prompt is accurate
 - Adding an explanation to aid in learning
+- Coloring improvements for readability
+
+## Future versions
+
+- Apply tree of thought prompting

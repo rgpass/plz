@@ -1,3 +1,67 @@
 #!/bin/bash
 
-echo "Hello, World!"
+source ./utility.sh
+
+OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Disable globbing. Without this, the * in the command will be expanded to
+# the files in the current directory. This will cause a premature expansion
+# of the glob.
+set -f
+
+# # Temporarily save the current working directory. This is used later to reset
+# # to the original state at the end of the script.
+# cwd=$(pwd)
+
+# If no command is given, exit with an error.
+if [ -z "$1" ]; then
+  handle_error "no command given" "Sample usage: plz list all files in the current directory"
+fi
+
+# Convert the CLI args to a string.
+input=$*
+
+response=$(response_for $input)
+
+# If the OpenAI API key is invalid, exit with an error.
+error_code=$(echo $response | jq -r ".error.code")
+if [ "$error_code" == "invalid_api_key" ]
+then
+  handle_error "invalid OpenAI API key" "Please set the OPENAI_API_KEY in the plz script."
+fi
+
+# If OpenAI reported an error, exit with an error.
+error_message=$(echo $response | jq -r '.error.message')
+if [ "$error_message" != "null" ]
+then
+  handle_error "OpenAI API error" $error_message
+fi
+
+command=$(parse_content "$response")
+
+# Echo the command.
+change_color "green"
+echo $command
+
+# Ask the user if they want an explanation of the command.
+prompt "Press any button to continue, or e for an explanation: "
+if [[ $REPLY =~ ^[Ee]$ ]]
+then
+  echo ""
+  change_color "yellow"
+
+  explanation=$(explanation_for "$command")
+  echo $(parse_content "$explanation")
+fi
+
+# Ask the user if they want to abort the command.
+prompt "Press any button to continue, or n to cancel: "
+if [[ $REPLY =~ ^[Nn]$ ]]
+then
+  echo ""
+  abort
+fi
+
+# Re-enable globbing.
+set +f
+exit 0
