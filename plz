@@ -1,17 +1,17 @@
 #!/bin/bash
 
 source ./utility.sh
-
-OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+source .env
 
 # Disable globbing. Without this, the * in the command will be expanded to
 # the files in the current directory. This will cause a premature expansion
 # of the glob.
 set -f
 
-# # Temporarily save the current working directory. This is used later to reset
-# # to the original state at the end of the script.
-# cwd=$(pwd)
+# If no OpenAI API key is set, exit with an error.
+if [ -z "$OPENAI_API_KEY" ]; then
+  handle_error "no OpenAI API key" "Please check your .env file."
+fi
 
 # If no command is given, exit with an error.
 if [ -z "$1" ]; then
@@ -27,7 +27,7 @@ response=$(response_for "$input")
 error_code=$(echo $response | jq -r ".error.code")
 if [ "$error_code" == "invalid_api_key" ]
 then
-  handle_error "invalid OpenAI API key" "Please set the OPENAI_API_KEY in the plz script."
+  handle_error "invalid OpenAI API key" "Please check your .env file."
 fi
 
 # If OpenAI reported an error, exit with an error.

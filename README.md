@@ -14,7 +14,8 @@ plz list all directories and their direct descendat directories
 
 - Create an OpenAI API key
 - Clone this repo and `cd plz`
-- Add this key to the `plz` file
+- Copy the `.env.example` via `cp .env.example .env`
+- Add the OpenAI API key to `.env`
 - Make `plz` executable via `chmod +x plz`
 - Add this directoy to your `$PATH`
   - Print the working directory via `pwd`
