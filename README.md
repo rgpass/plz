@@ -5,14 +5,14 @@
 ## Example
 
 ```bash
-$ plz grep all files that contain the string: plz
+$ plz grep all files that contain the string "plz"
 ```
 
 ```text
-grep -r "plz" /Users/gpass/scripts
+grep -r "plz" /Users/gpass/scripts/plz
 
 Press Return to continue, or e for an explanation: e
-This command searches for the string "plz" recursively in all files under the directory /Users/gpass/scripts. The -r flag specifies recursive search.
+This command searches for the string "plz" recursively in all files under the directory /Users/gpass/scripts/plz. The -r flag specifies recursive search.
 
 Press Return to continue, or n to cancel:
 
@@ -21,12 +21,21 @@ Executing command...
 /Users/gpass/scripts/plz/plz:  handle_error "no command given" "Sample usage: plz list all files in the current directory"
 /Users/gpass/scripts/plz/README.md:# `plz` CLI
 /Users/gpass/scripts/plz/README.md:`plz` is a CLI tool to translate natural language into bash commands. It uses your own API key and does not hit any other services, keep your key secure.
-/Users/gpass/scripts/plz/README.md:$ plz list all directories and their direct descendant directories
+/Users/gpass/scripts/plz/README.md:$ plz grep all files that contain the string: plz
+/Users/gpass/scripts/plz/README.md:grep -r "plz" /Users/gpass/scripts
+/Users/gpass/scripts/plz/README.md:This command searches for the string "plz" recursively in all files under the directory /Users/gpass/scripts. The -r flag specifies recursive search.
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/plz:  handle_error "no command given" "Sample usage: plz list all files in the current directory"
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/README.md:# `plz` CLI
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/README.md:`plz` is a CLI tool to translate natural language into bash commands. It uses your own API key and does not hit any other services, keep your key secure.
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/README.md:$ plz list all directories and their direct descendant directories
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/README.md:- Clone this repo and `cd plz`
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/README.md:- Make `plz` executable via `chmod +x plz`
+/Users/gpass/scripts/plz/README.md:/Users/gpass/scripts/plz/.git/config:   url = https://github.com/rgpass/plz.git
+/Users/gpass/scripts/plz/README.md:Binary file /Users/gpass/scripts/plz/.git/index matches
 /Users/gpass/scripts/plz/README.md:- Clone this repo and `cd plz`
 /Users/gpass/scripts/plz/README.md:- Make `plz` executable via `chmod +x plz`
 /Users/gpass/scripts/plz/.git/config:   url = https://github.com/rgpass/plz.git
 Binary file /Users/gpass/scripts/plz/.git/index matches
-Binary file /Users/gpass/scripts/pls/.git/objects/pack/pack-11466addc197c653310ff4853c6ccd71f339e900.pack matches
 ```
 
 ## Installation
