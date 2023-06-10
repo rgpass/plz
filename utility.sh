@@ -22,16 +22,18 @@ change_color() {
 }
 
 explanation_for() {
+  escaped_input=$(echo "$1" | sed 's/"/\\"/g')
+
   explanation=$(curl -s https://api.openai.com/v1/chat/completions \
     -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer '$OPENAI_API_KEY'' \
     -d '{
     "model": "gpt-3.5-turbo",
-    "messages": [{"role": "system", "content": "You are a helpful assistant. You explain '$SHELL' commands based on user input, including flags. Your response should be concise."}, {"role": "user", "content": "'"$1"'"}],
+    "messages": [{"role": "system", "content": "You are a helpful assistant. You explain '$SHELL' commands based on user input, including flags. Your response should be concise."}, {"role": "user", "content": "'"$escaped_input"'"}],
     "temperature": 0.0
   }')
 
-  echo $explanation
+  echo "$explanation"
 }
 
 handle_error() {

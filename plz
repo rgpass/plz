@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./utility.sh
+DIR="$(dirname "$0")"
+source "$DIR/utility.sh"
 source .env
 
 # Disable globbing. Without this, the * in the command will be expanded to
